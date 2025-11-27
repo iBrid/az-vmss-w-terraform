@@ -5,12 +5,12 @@ output "resource_group_name" {
 
 output "vmss_name" {
   description = "Name of the Virtual Machine Scale Set"
-  value       = azurerm_linux_virtual_machine_scale_set.vmss.name
+  value       = azurerm_windows_virtual_machine_scale_set.vmss.name
 }
 
 output "vmss_id" {
   description = "ID of the Virtual Machine Scale Set"
-  value       = azurerm_linux_virtual_machine_scale_set.vmss.id
+  value       = azurerm_windows_virtual_machine_scale_set.vmss.id
 }
 
 output "load_balancer_public_ip" {

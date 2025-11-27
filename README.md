@@ -12,7 +12,7 @@ This Terraform configuration creates the following Azure resources:
 - **Network Security Group**: Firewall rules for HTTP/HTTPS traffic
 - **Public IP**: Static IP for the load balancer
 - **Load Balancer**: Distributes traffic across VM instances
-- **Virtual Machine Scale Set**: Linux VMs running Ubuntu 22.04 LTS
+- **Virtual Machine Scale Set**: Windows VMs running Windows Server 2022 Datacenter Azure Edition
 
 ## Prerequisites
 

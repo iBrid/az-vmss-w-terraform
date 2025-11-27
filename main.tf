@@ -114,24 +114,22 @@ resource "azurerm_lb_rule" "vmss" {
 }
 
 # Virtual Machine Scale Set
-# Note: Password authentication is enabled for flexibility. For production,
-# consider using SSH key authentication by setting disable_password_authentication = true
-# and adding an admin_ssh_key block.
-resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
-  name                            = var.vmss_name
-  resource_group_name             = azurerm_resource_group.vmss.name
-  location                        = azurerm_resource_group.vmss.location
-  sku                             = var.vm_sku
-  instances                       = var.instance_count
-  admin_username                  = var.admin_username
-  admin_password                  = var.admin_password
-  disable_password_authentication = false
-  tags                            = var.tags
+# Note: Password authentication is used for flexibility.
+resource "azurerm_windows_virtual_machine_scale_set" "vmss" {
+  name                 = var.vmss_name
+  resource_group_name  = azurerm_resource_group.vmss.name
+  location             = azurerm_resource_group.vmss.location
+  sku                  = var.vm_sku
+  instances            = var.instance_count
+  admin_username       = var.admin_username
+  admin_password       = var.admin_password
+  computer_name_prefix = "vmss"
+  tags                 = var.tags
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2022-datacenter-azure-edition"
     version   = "latest"
   }
 
