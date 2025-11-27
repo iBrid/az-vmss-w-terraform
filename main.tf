@@ -23,6 +23,8 @@ resource "azurerm_subnet" "vmss" {
 }
 
 # Network Security Group
+# Note: These rules allow HTTP/HTTPS from any source for flexibility.
+# For production, consider restricting source_address_prefix to specific IP ranges.
 resource "azurerm_network_security_group" "vmss" {
   name                = "${var.vmss_name}-nsg"
   location            = azurerm_resource_group.vmss.location
@@ -112,6 +114,9 @@ resource "azurerm_lb_rule" "vmss" {
 }
 
 # Virtual Machine Scale Set
+# Note: Password authentication is enabled for flexibility. For production,
+# consider using SSH key authentication by setting disable_password_authentication = true
+# and adding an admin_ssh_key block.
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   name                            = var.vmss_name
   resource_group_name             = azurerm_resource_group.vmss.name
